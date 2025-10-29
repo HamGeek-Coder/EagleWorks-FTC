@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ctrl-Z Robotics | FTC Team 12345</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for a techy look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; /* Slate 900 background */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0e7490; /* Cyan 600 */
+            border-radius: 4px;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1e40af', // Blue 700
+                        'secondary-cyan': '#0e7490', // Cyan 700
+                        'dark-bg': '#0f172a', // Slate 900
+                        'light-text': '#f1f5f9', // Slate 100
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-light-text">
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900/95 shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b border-secondary-cyan/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Team Name -->
+                <a href="#" class="flex items-center space-x-2">
+                    <!-- Gear SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary-cyan" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-.21-.8-.38-1.23-.52.27-.67.43-1.39.43-2.16 0-.29-.23-.52-.52-.52h-2c-.29 0-.52.23-.52.52 0 .77.16 1.49.43 2.16-.43.14-.85.31-1.23.52-.36.2-.68.43-.99.7-.31.27-.58.58-.81.91C6.26 5.61 6 6.22 6 6.94c0 .35.1.7.3 1.05.2.35.48.65.84.89l.39.26c.45.3.84.66 1.15 1.09.31.43.46.9.46 1.41 0 .52-.15 1-.46 1.43-.31.43-.7.79-1.15 1.09l-.39.26c-.36.24-.64.54-.84.89-.2.35-.3.7-.3 1.05 0 .72.26 1.33.78 1.8.23.33.5.64.81.91.31.27.63.5.99.7 1.13.62 2.37.94 3.65.94 1.28 0 2.52-.32 3.65-.94.36-.2.68-.43.99-.7.31-.27.58-.58.81-.91.52-.47.78-1.08.78-1.8 0-.35-.1-.7-.3-1.05-.2-.35-.48-.65-.84-.89l-.39-.26c-.45-.3-.84-.66-1.15-1.09-.31-.43-.46-.9-.46-1.41 0-.52.15-1 .46-1.43.31-.43.7-.79 1.15-1.09l.39-.26c.36-.24.64-.54.84-.89.2-.35.3-.7.3-1.05 0-.72-.26-1.33-.78-1.8a3.3 3.3 0 00-.81-.91c-.31-.27-.63-.5-.99-.7zM10 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="flex flex-col leading-none">
+                        <span class="text-xl font-extrabold text-white tracking-tight">
+                            Ctrl-Z Robotics
+                        </span>
+                        <span class="text-xs font-medium text-secondary-cyan">
+                            FTC Team 12345
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="#about" class="text-slate-300 hover:text-white font-medium transition duration-150 ease-in-out hover:underline underline-offset-4">About Us</a>
+                    <a href="#robot" class="text-slate-300 hover:text-white font-medium transition duration-150 ease-in-out hover:underline underline-offset-4">Our Robot</a>
+                    <a href="#sponsors" class="text-slate-300 hover:text-white font-medium transition duration-150 ease-in-out hover:underline underline-offset-4">Sponsors</a>
+                    <a href="#join" class="text-slate-300 hover:text-white font-medium transition duration-150 ease-in-out hover:underline underline-offset-4">Get Involved</a>
+                </nav>
+
+                <!-- Support Button -->
+                <a href="#sponsors" class="hidden md:block bg-primary-blue text-white px-5 py-2 rounded-lg font-semibold shadow-xl hover:bg-blue-600 transition duration-150 ease-in-out transform hover:scale-105">
+                    Support Our Team
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-secondary-cyan hover:text-white focus:outline-none">
+                    <!-- Hamburger icon -->
+                    <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Close icon (hidden by default) -->
+                    <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/90 border-t border-secondary-cyan/30">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-100 hover:bg-primary-blue/30 transition duration-150">About Us</a>
+                <a href="#robot" class="block px-3 py-2 rounded-md text-base font-medium text-slate-100 hover:bg-primary-blue/30 transition duration-150">Our Robot</a>
+                <a href="#sponsors" class="block px-3 py-2 rounded-md text-base font-medium text-slate-100 hover:bg-primary-blue/30 transition duration-150">Sponsors</a>
+                <a href="#join" class="block px-3 py-2 rounded-md text-base font-medium text-slate-100 hover:bg-primary-blue/30 transition duration-150">Get Involved</a>
+                <a href="#sponsors" class="block px-3 py-2 rounded-md text-base font-bold text-white bg-secondary-cyan hover:bg-cyan-600 mt-2 transition duration-150 text-center">
+                    Support Our Team
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative py-24 sm:py-32 lg:py-48 overflow-hidden">
+            <!-- Background Grid Effect -->
+            <div class="absolute inset-0 z-0 opacity-20 bg-grid">
+                <svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 L 0 20" fill="none" stroke="#0f172a" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+                </svg>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <span class="text-secondary-cyan text-sm sm:text-base font-semibold uppercase tracking-widest mb-4 inline-block bg-primary-blue/20 px-3 py-1 rounded-full border border-secondary-cyan/50">
+                    POWERING INNOVATION SINCE 2020
+                </span>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-4 leading-tight">
+                    <span class="block text-primary-blue">Ctrl-Z Robotics</span>
+                    <span class="block mt-2">Built to Compete. Designed to Inspire.</span>
+                </h1>
+                <p class="text-lg sm:text-xl font-light mb-10 max-w-4xl mx-auto text-slate-300">
+                    We are **FTC Team 12345**, merging software, engineering, and business skills to build award-winning robots and inspire the next generation of STEM leaders.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#robot" class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-xl shadow-2xl text-white bg-primary-blue hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 animate-bounce-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        See the Robot
+                    </a>
+                    <a href="#sponsors" class="inline-flex items-center px-8 py-3 border-2 border-secondary-cyan text-lg font-medium rounded-xl text-secondary-cyan hover:bg-secondary-cyan hover:text-white transition duration-300 ease-in-out transform hover:scale-105">
+                        Become a Sponsor
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 border-t border-slate-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+                    What is FTC? Our Mission
+                </h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-secondary-cyan">The Challenge</h3>
+                        <p class="mb-4 text-slate-300">
+                            The **FIRST Tech Challenge (FTC)** is a rigorous robotics competition for students in grades 7-12. Every year, we are tasked with designing, building, and programming a robot to compete in a game with specific objectives and rules. It's about engineering, teamwork, and sportsmanship!
+                        </p>
+                        <h3 class="text-2xl font-semibold mb-4 text-secondary-cyan">Our Philosophy: "Undo and Redo"</h3>
+                        <p class="text-slate-300">
+                            Our team name, **Ctrl-Z Robotics**, represents our commitment to the iterative design process. Failure is just a chance to learn, hit "undo," and come back with a better solution. We prioritize safety, documentation, and sharing our knowledge with the community through outreach events.
+                        </p>
+                    </div>
+                    <!-- Stats/Key Metrics Card -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-2xl border border-secondary-cyan/50 space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-4xl font-extrabold text-primary-blue">5+</span>
+                            <p class="text-slate-200">Years of Competitive Robotics Experience</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-4xl font-extrabold text-primary-blue">15</span>
+                            <p class="text-slate-200">Dedicated Student Members</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-4xl font-extrabold text-primary-blue">90%</span>
+                            <p class="text-slate-200">Advancement Rate to State Championships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Robot Section -->
+        <section id="robot" class="py-20 bg-slate-800 border-t border-slate-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+                    Our 2025 Robot: The "Iteration X"
+                </h2>
+                <p class="text-center mb-16 max-w-3xl mx-auto text-slate-300">
+                    Built for the latest game challenge, Iteration X features a custom 4-wheel drive, a revolutionary scoring mechanism, and advanced autonomous programming using computer vision.
+                </p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-dark-bg p-6 rounded-lg shadow-xl border-t-4 border-primary-blue hover:shadow-primary-blue/30 transition duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-blue mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Custom Drivetrain</h3>
+                        <p class="text-slate-400 text-sm">A highly stable and powerful 4-wheel omni drive system allows for quick, precise movements across the field.</p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="bg-dark-bg p-6 rounded-lg shadow-xl border-t-4 border-secondary-cyan hover:shadow-secondary-cyan/30 transition duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary-cyan mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 17h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Vision-Based Autonomy</h3>
+                        <p class="text-slate-400 text-sm">We use OpenCV and TensorFlow to identify game elements, ensuring reliable scoring during the 30-second autonomous period.</p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="bg-dark-bg p-6 rounded-lg shadow-xl border-t-4 border-primary-blue hover:shadow-primary-blue/30 transition duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-blue mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-2.856-2.856l-4.24 4.24v.001l-1.06 1.061m4.24-4.24L17.72 18.28l1.06-1.06a2 2 0 000-2.828l-4.24-4.24zM10.5 5.25L15 9.75M4.5 9.75L9 5.25M7.5 7.5L4.5 4.5" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Efficient Scoring</h3>
+                        <p class="text-slate-400 text-sm">Our unique linear slide mechanism and claw assembly allow us to rapidly collect and score game elements at all height levels.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sponsors Section -->
+        <section id="sponsors" class="py-20 border-t border-slate-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-white">
+                    Our Valued Partners
+                </h2>
+                <p class="mb-12 max-w-3xl mx-auto text-slate-300">
+                    We rely on the generosity of our sponsors to cover materials, registration fees, and travel costs. Thank you for making our season possible!
+                </p>
+
+                <!-- Sponsor Grid (Placeholder Icons) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-center">
+                    <!-- Placeholder 1: Platinum Level -->
+                    <div class="p-4 bg-slate-900 rounded-lg shadow-inner border border-primary-blue/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-primary-blue">TechCorp</p>
+                        <p class="text-xs text-slate-500">Platinum Sponsor</p>
+                    </div>
+                    <!-- Placeholder 2: Gold Level -->
+                    <div class="p-4 bg-slate-900 rounded-lg shadow-inner border border-secondary-cyan/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-secondary-cyan">Innovate Labs</p>
+                        <p class="text-xs text-slate-500">Gold Sponsor</p>
+                    </div>
+                    <!-- Placeholder 3: Silver Level -->
+                    <div class="p-4 bg-slate-900 rounded-lg shadow-inner border border-slate-600/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-slate-300">Community Bank</p>
+                        <p class="text-xs text-slate-500">Silver Sponsor</p>
+                    </div>
+                    <!-- Placeholder 4: In-Kind -->
+                    <div class="p-4 bg-slate-900 rounded-lg shadow-inner border border-slate-600/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-slate-300">Makerspace HQ</p>
+                        <p class="text-xs text-slate-500">In-Kind Donor</p>
+                    </div>
+                    <!-- Placeholder 5: Bronze -->
+                    <div class="hidden lg:block p-4 bg-slate-900 rounded-lg shadow-inner border border-slate-600/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-slate-300">Local Hardware</p>
+                        <p class="text-xs text-slate-500">Bronze Sponsor</p>
+                    </div>
+                    <!-- Placeholder 6: Bronze -->
+                    <div class="hidden lg:block p-4 bg-slate-900 rounded-lg shadow-inner border border-slate-600/50 transform hover:scale-105 transition duration-300">
+                        <p class="text-xl font-bold text-slate-300">School PTA</p>
+                        <p class="text-xs text-slate-500">Bronze Sponsor</p>
+                    </div>
+                </div>
+
+                <!-- Sponsorship CTA -->
+                <div class="mt-16 bg-slate-900 p-8 rounded-xl border border-secondary-cyan/50 shadow-2xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-secondary-cyan">Ready to Join Our Success?</h3>
+                    <p class="mb-6 text-slate-300">
+                        Your support directly funds components, tools, and competition travel. Partner with us to invest in STEM education!
+                    </p>
+                    <a href="#" class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-xl text-white bg-secondary-cyan hover:bg-cyan-600 transition duration-300 ease-in-out">
+                        View Sponsorship Packet
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Involved Section -->
+        <section id="join" class="py-20 bg-slate-800 border-t border-slate-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-white">
+                    Get Involved
+                </h2>
+                <p class="mb-12 max-w-3xl mx-auto text-slate-300">
+                    Whether you're a student looking to join, a mentor with engineering experience, or just curious—we welcome you to the team!
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Column 1: Join the Team -->
+                    <div class="p-6 rounded-xl bg-dark-bg border border-slate-700 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-blue mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Join the Team</h3>
+                        <p class="text-slate-400 mb-4">Students interested in mechanical, programming, or business skills. No experience needed!</p>
+                        <a href="#" class="text-secondary-cyan hover:text-cyan-400 font-medium">Apply Today &rarr;</a>
+                    </div>
+
+                    <!-- Column 2: Mentor -->
+                    <div class="p-6 rounded-xl bg-dark-bg border border-slate-700 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-blue mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.565 23.565 0 0112 15c-3.18 0-6.268-.535-9-1.545M21 14v1a10.027 10.027 0 01-1.996 6.004c-1.895 1.5-4.2 2.496-6.004 2.996-1.8-.5-4.105-1.496-6.004-2.996A10.027 10.027 0 013 15v-1m18 0a3 3 0 11-6 0 3 3 0 016 0zM3 14a3 3 0 116 0 3 3 0 01-6 0z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Become a Mentor</h3>
+                        <p class="text-slate-400 mb-4">Share your professional skills in CAD, Java, or business planning with the students.</p>
+                        <a href="#" class="text-secondary-cyan hover:text-cyan-400 font-medium">Contact Us &rarr;</a>
+                    </div>
+
+                    <!-- Column 3: Follow Our Journey -->
+                    <div class="p-6 rounded-xl bg-dark-bg border border-slate-700 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-blue mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-white">Follow Our Journey</h3>
+                        <p class="text-slate-400 mb-4">Track our progress, competition results, and outreach events on social media!</p>
+                        <a href="#" class="text-secondary-cyan hover:text-cyan-400 font-medium">Find Us Online &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-secondary-cyan/30 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-sm">
+                    &copy; 2025 Ctrl-Z Robotics | FTC Team 12345. All rights reserved.
+                </p>
+                <div class="flex space-x-4 text-xl">
+                    <!-- Social Media Placeholders -->
+                    <a href="#" class="hover:text-white transition duration-150" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.32 8.71c.07.72.08 1.45 0 2.18-.08.73-.28 1.44-.6 2.08-.32.64-.78 1.18-1.34 1.58-.56.4-1.24.64-1.95.64-.71 0-1.39-.24-1.95-.64-.56-.4-1.02-.94-1.34-1.58-.32-.64-.52-1.35-.6-2.08-.08-.73-.07-1.46 0-2.18.08-.73.28-1.44.6-2.08.32-.64.78-1.18 1.34-1.58.56-.4 1.24-.64 1.95-.64.71 0 1.39.24 1.95.64.56.4 1.02.94 1.34 1.58.32.64.52 1.35.6 2.08zM12 9a3 3 0 100 6 3 3 0 000-6z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="hover:text-white transition duration-150" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.54 6.51A3.21 3.21 0 0019.23 4.2C17.7 4 12 4 12 4s-5.7 0-7.23.21A3.21 3.21 0 002.46 6.51c-.19 1.35-.22 4.09-.22 5.49s.03 4.14.22 5.49a3.21 3.21 0 002.31 2.31c1.53.21 7.23.21 7.23.21s5.7 0 7.23-.21a3.21 3.21 0 002.31-2.31c.19-1.35.22-4.09.22-5.49s-.03-4.14-.22-5.49zm-13.4 9.12V8.37l5.44 3.39-5.44 3.87z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="hover:text-white transition duration-150" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.7v-2.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 .7 2.7.5 3.3.4.1-.3.4-.6.6-.8-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1.1-.3 3.6 1.2a12.5 12.5 0 016.2 0c2.5-1.5 3.6-1.2 3.6-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.2.8 2.3v3.4c0 .4.2.8.8.7A12 12 0 0012 0z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <p class="text-xs mt-6">
+                Proud participants in the FIRST Tech Challenge. Building Science, Technology, Engineering, and Math (STEM) leaders.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+        
+        // Function to toggle the menu
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.contains('hidden');
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Close the mobile menu when a link is clicked
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Use a short delay to allow for smooth transition before closing
+                setTimeout(() => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                }, 150); 
+            });
+        });
+    </script>
+</body>
+</html>
